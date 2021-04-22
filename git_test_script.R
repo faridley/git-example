@@ -6,7 +6,7 @@
 rm(list = ls())
 getwd()
 
-dir_data <- "C:/Users/chess/OneDrive - Newcastle University/PhD homework/Chapter 1 Systematic Map etc/Systematic Map/Systematic Map Analysis/Data extraction"
+dir_data <-"C:/Users/chess/OneDrive - Newcastle University/PhD homework/Other Work and Demonstrating/BIO8068/git-example"
 setwd(dir_data)
 
 
@@ -23,7 +23,7 @@ library(ggpol)
 ## 1.1 Import and tidy data ####
 
 # remove number codes from variable names first
-data <- read.csv("Data_ThreatMappingSM_FR.csv", header = TRUE, na.strings = c(""))
+data <- read.csv("git_test_data.csv", header = TRUE, na.strings = c(""))
 data$Comments <- NULL
 summary(as.factor(data$Inclusion))
 
@@ -191,8 +191,8 @@ library(networkD3)
 ## 4.1.0 Make taxa dataframe ####
 taxa <- data %>%  dplyr::select(ArticleID, tax_kingdom, animal_group, plant_group) %>% 
   filter(tax_kingdom != "na") %>% 
-  separate(tax_kingdom, c("K1", "K2"), sep = ";", extra = "drop") %>% 
-  gather(key ="Placement", value = "Kingdom", c("K1", "K2")) %>% 
+  tidyr::separate(tax_kingdom, c("K1", "K2"), sep = ";", extra = "drop") %>% 
+  tidyr::gather(key ="Placement", value = "Kingdom", c("K1", "K2")) %>% 
   na.omit()
 
 for (i in 1:length(taxa$ArticleID)) {
